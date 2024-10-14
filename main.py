@@ -1,4 +1,5 @@
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -32,14 +33,20 @@ def main():
             if event.type == pygame.QUIT:
                 running = False 
         
-
+        # update movile objects
         for obj_update in updatable:
             obj_update.update(dt)
 
         screen.fill("black")
-
+        # draw objects
         for obj_draw in drawable:
             obj_draw.draw(screen)        
+
+        # check for colisions
+        for ast in asteroids:
+            if player.checkColsion(ast):
+                sys.exit("Game Over")
+            
 
         # render screen should be always at last, if not none of the objects will display
         pygame.display.flip()
