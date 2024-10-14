@@ -49,8 +49,12 @@ def main():
         for ast in asteroids:
             if player.checkColision(ast):
                 sys.exit("Game Over")
-        
-        
+            
+            for shot in shots:
+                if ast.checkColision(shot):
+                    ast.split()
+                    shot.kill()
+
 
         # render screen should be always at last, if not none of the objects will display
         pygame.display.flip()
